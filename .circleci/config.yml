@@ -16,6 +16,7 @@ jobs:
           command: yarn run compile
 
 workflows:
-  build_and_test:
+  version: 2
+  build:
     jobs:
-      - build:
+      - build
