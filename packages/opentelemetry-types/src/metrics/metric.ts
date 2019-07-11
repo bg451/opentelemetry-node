@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright 2019, OpenTelemetry Authors
  *
@@ -17,9 +16,6 @@
 
 import { Attributes } from '../trace/attributes';
 import { Resource } from '../resources/Resource';
-=======
-import { Attributes } from '../common/attributes';
-
 export interface Meter {
   createMeasure(name: string, options?: MesureOptions): Measure;
 
@@ -28,7 +24,6 @@ export interface Meter {
 
   record([]Measurement measurements);
 }
->>>>>>> ckpt
 
 export interface MetricOptions {
   // Description of the Metric.
@@ -37,21 +32,12 @@ export interface MetricOptions {
   // Unit of the Metric values.
   unit?: string;
 
-<<<<<<< HEAD
   // List of attribute keys with dynamic values. Order of list is important
   // as the same order must be used when supplying values for these attributes.
   dynamicAttributes?: string[];
 
   // List of attributes with constant values.
   constantAttributes?: Attributes;
-=======
-  // List of keys for attributes with dynamic values. Order of list is important
-  // as the same order must be used when supplying values for these attributes.
-  dynamicAttributes?: []string
-
-  // List of attributes with constant values.
-  constantAttributes?: []Attributes;
->>>>>>> ckpt
 
   // Resource the metric is associated with.
   resource?: Resource;
