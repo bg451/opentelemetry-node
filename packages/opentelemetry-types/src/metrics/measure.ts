@@ -14,3 +14,22 @@
  * limitations under the License.
  */
 
+export enum MeasureType {
+  DOUBLE = 0,
+  LONG = 1,
+}
+
+export interface MeasureOptions {
+  description?: string;
+  unit?: string;
+  type?: MeasureType,
+}
+
+export interface Measure {
+  createDoubleMeasurement(value: double): Measurement;
+  createLongMeasurement(value: long): Measurement;
+}
+
+
+// Measurement describes an individual measurement
+export interface Measurement {}

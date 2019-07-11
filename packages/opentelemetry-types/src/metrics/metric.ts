@@ -1,14 +1,5 @@
 import { Attributes } from '../common/attributes';
 
-export interface Meter {
-  createMeasure(name: string, options?: MesureOptions): Measure;
-
-  createDoubleMeasurement(name: string): Measure;
-  CreateLongMeasurement(name: string): Measure>;
-
-  record([]Measurement measurements);
-}
-
 export interface MetricOptions {
   // Description of the Metric.
   description?: string;
@@ -30,9 +21,15 @@ export interface MetricOptions {
   component? string;
 }
 
-// metrics<Counter<Double>>
 export interface Metric<T> {
+  // getOrCreateTimeSeries creates a timeseries if the specified attribute values
+  // are not associated with an existing timeseries, otherwise returns the
+  // existing timeseries.
+  // Order and number of attribute values MUST match the order and number of
+  // dynanic attribute keys when the Metric was created.
   getOrCreateTimeSeries(values: []unknown): T;
+
+  // Returns a timeseries with all attribute values not set.
   getDefaultTimeSeries(): T;
 
   removesTimeseries(values: []unknown): void;
@@ -42,12 +39,3 @@ export interface Metric<T> {
   // todo: what should the callback signature be?
   setCallback(fn: () => void): void;
 }
-
-export interface Measure {
-  createDoubleMeasurement(value: double): Measurement;
-  createLongMeasurement(value: long): Measurement;
-}
-
-
-// Measurement describes an individual measurement
-export interface Measurement{}
