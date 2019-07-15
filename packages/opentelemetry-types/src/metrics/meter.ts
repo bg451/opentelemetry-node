@@ -1,6 +1,9 @@
 import { SpanContext } from '../trace/span_context';
-import { DistributedContext } from '../distributed_context/distributed_context';
-import { Measure, MeasureOptions, Measurement }from './measure';
+import { DistributedContext } from '../distributed_context/DistributedContext';
+import { Measure, MeasureOptions, Measurement } from './measure';
+import { Metric, MetricOptions } from './metric';
+import { CounterTimeSeries } from './counter';
+import { GaugeTimeSeries } from './gauge';
 
 export interface RecordOptions {
   spanContext?: SpanContext;
@@ -8,13 +11,11 @@ export interface RecordOptions {
 }
 
 export interface Meter {
-  createMeasure(name: string, options?: MesureOptions): Measure;
+  createMeasure(name: string, options?: MeasureOptions): Measure;
 
-  createCounterDouble(name: string, options?: MetricOptions) Metric<CounterDoubleTimeSeries>;
-  createCounterLong(name: string, options?: MetricOptions) Metric<CounterLongTimeSeries>;
-  createGauageDouble(name: string, options? MetricOptions) Metric<GaugeDoubleTimeSeries>;
-  createGauageLong(name: string, options? MetricOptions) Metric<GaugeLongTimeSeries>;
+  createCounter(name: string, options?: MetricOptions): Metric<CounterTimeSeries>;
+  createGauage(name: string, options?: MetricOptions): Metric<GaugeTimeSeries>;
 
-  record(measurements: []Measurement, options?: RecordOptions);
+  record(measurements: Measurement[], options?: RecordOptions): void;
 }
 

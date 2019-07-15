@@ -26,8 +26,7 @@ export interface MeasureOptions {
 }
 
 export interface Measure {
-  createDoubleMeasurement(value: double): Measurement;
-  createLongMeasurement(value: long): Measurement;
+  createMeasurement(value: number): Measurement;
 }
 
 

@@ -1,4 +1,5 @@
-import { Attributes } from '../common/attributes';
+import { Attributes } from '../trace/attributes';
+import { Resource } from '../resources/Resource';
 
 export interface MetricOptions {
   // Description of the Metric.
@@ -9,16 +10,16 @@ export interface MetricOptions {
 
   // List of keys for attributes with dynamic values. Order of list is important
   // as the same order must be used when supplying values for these attributes.
-  dynamicAttributes?: []string
+  dynamicAttributes?: string[];
 
   // List of attributes with constant values.
-  constantAttributes?: []Attributes;
+  constantAttributes?: Attributes[];
 
   // Resource the metric is associated with.
   resource?: Resource;
 
   // Name of the component that reports the metric.
-  component? string;
+  component?: string;
 }
 
 export interface Metric<T> {
@@ -27,12 +28,12 @@ export interface Metric<T> {
   // existing timeseries.
   // Order and number of attribute values MUST match the order and number of
   // dynanic attribute keys when the Metric was created.
-  getOrCreateTimeSeries(values: []unknown): T;
+  getOrCreateTimeSeries(values: unknown[]): T;
 
   // Returns a timeseries with all attribute values not set.
   getDefaultTimeSeries(): T;
 
-  removesTimeseries(values: []unknown): void;
+  removesTimeseries(values: unknown[]): void;
 
   clear(): void;
 

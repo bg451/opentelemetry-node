@@ -28,4 +28,3 @@ export * from './trace/span_kind';
 export * from './trace/status';
 export * from './trace/trace_options';
 export * from './trace/trace_state';
-export * from './common/attributes';
