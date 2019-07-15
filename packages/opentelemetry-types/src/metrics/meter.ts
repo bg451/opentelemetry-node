@@ -30,6 +30,7 @@ export interface RecordOptions {
 }
 
 export interface Meter {
+<<<<<<< HEAD
   // Creates and returns a new @link{Measure}.
   createMeasure(name: string, options?: MeasureOptions): Measure;
 

@@ -39,4 +39,3 @@ export * from './trace/TimedEvent';
 export * from './trace/tracer';
 export * from './trace/trace_options';
 export * from './trace/trace_state';
-export * from './common/attributes';
