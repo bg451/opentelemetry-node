@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 
-// TODO: Measurements can have a long or double type. However, it looks like
-// the metric timeseries API accepts values instead of Measurements, meaning
-// that if you accept a number, the type gets lost. Both java and csharp have
-// gone down the route of having two gauge interfaces, GaugeDoubleTimeseries and
-// GaugeLongTimeseries, with param for that type. It'd be cool to only have a single
-// interface, but maybe having two is necessary? Probs a good gh issue, the same
-// goes for Measure types.
 export interface GaugeTimeseries {
   // Adds the given value to the current value. Values can be negative.
   add(value: number): void;

@@ -36,6 +36,14 @@ export interface Meter {
   // Creates a new counter metric.
   createCounter(name: string, options?: MetricOptions): Metric<CounterTimeseries>;
 
+  // TODO: Measurements can have a long or double type. However, it looks like
+  // the metric timeseries API (according to spec) accepts values instead of
+  // Measurements, meaning that if you accept a `number`, the type gets lost.
+  // Both java and csharp have gone down the route of having two gauge interfaces,
+  // GaugeDoubleTimeseries and GaugeLongTimeseries, with param for that type. It'd
+  // be cool to only have a single interface, but maybe having two is necessary?
+  // Maybe include the type as a metrics option? Probs a good gh issue, the same goes for Measure types.
+
   // Creates a new gauge metric.
   createGauge(name: string, options?: MetricOptions): Metric<GaugeTimeseries>;
 
