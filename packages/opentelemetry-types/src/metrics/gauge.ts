@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface GaugeTimeseries {
+export interface GaugeHandle {
   // Sets the given value. Values can be negative.
   set(value: number): void;
 }

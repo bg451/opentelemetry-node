@@ -59,22 +59,22 @@ export interface MetricOptions {
 
 // Metric represents a base class for different types of metric preaggregations.
 export interface Metric<T> {
-  // Creates a timeseries if the specified attribute values
-  // are not associated with an existing timeseries, otherwise returns the
-  // existing timeseries.
+  // Creates a handle if the specified attribute values
+  // are not associated with an existing handle, otherwise returns the
+  // existing handle.
   // Order and number of attribute values MUST match the order and number of
   // dynanic attribute keys when the Metric was created.
-  getOrCreateTimeseries(values: unknown[]): T;
+  getOrCreateHandle(values: unknown[]): T;
 
-  // Returns a timeseries with all attribute values not set.
-  getDefaultTimeseries(): T;
+  // Returns a handle with all attribute values not set.
+  getDefaultHandle(): T;
 
-  // Removes an existing timeseries. Order and number of attribute values MUST
+  // Removes an existing handle. Order and number of attribute values MUST
   // match the order and number of dynamic attribute keys when the Metric was
   // created.
-  removesTimeseries(values: unknown[]): void;
+  removesHandle(values: unknown[]): void;
 
-  // Clears all timeseries from the Metric.
+  // Clears all handle from the Metric.
   clear(): void;
 
   // todo: what should the callback signature be?
