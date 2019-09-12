@@ -15,6 +15,6 @@
  */
 
 // Measure represents a metric object that is used for recording raw measurements.
-export interface MeasureTimeseries {
+export interface MeasureHandle {
   record(value: number): void;
 }
