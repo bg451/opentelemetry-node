@@ -51,7 +51,10 @@ export interface MetricOptions {
 
   // Unitdirection indicates a gauge metric only ascends, indicating it is for
   // rate calculations.
-  unidirectional?: boolean.
+  unidirectional?: boolean;
+
+  // indicates a measure is never negative, indicating it is for rate calculations.
+  nonNegative?: boolean;
 }
 
 // Metric represents a base class for different types of metric preaggregations.
