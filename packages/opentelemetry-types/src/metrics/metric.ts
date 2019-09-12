@@ -18,24 +18,28 @@ import { Attributes } from '../trace/attributes';
 import { Resource } from '../resources/Resource';
 
 export interface MetricOptions {
+  // Name of the component that reports the metric.
+  component?: string;
+
+  // Resource the metric is associated with.
+  resource?: Resource;
+
   // Description of the Metric.
   description?: string;
 
   // Unit of the Metric values.
   unit?: string;
 
+  // List of attributes with constant values.
+  constantAttributes?: Attributes;
+
   // List of attribute keys with dynamic values. Order of list is important
   // as the same order must be used when supplying values for these attributes.
   dynamicAttributes?: string[];
 
-  // List of attributes with constant values.
-  constantAttributes?: Attributes;
-
-  // Resource the metric is associated with.
-  resource?: Resource;
-
-  // Name of the component that reports the metric.
-  component?: string;
+  // Bidirectional allows cumulative metrics to accept negative values. Otherwise,
+  // as false, the metric is unidirectional and rejects negative values.
+  bidirectional?: boolean;
 }
 
 // Metric represents a base class for different types of metric preaggregations.
