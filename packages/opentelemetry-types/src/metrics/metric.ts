@@ -48,6 +48,10 @@ export interface MetricOptions {
   // Bidirectional allows cumulative metrics to accept negative values. Otherwise,
   // as false, the metric is unidirectional and rejects negative values.
   bidirectional?: boolean;
+
+  // Unitdirection indicates a gauge metric only ascends, indicating it is for
+  // rate calculations.
+  unidirectional?: boolean.
 }
 
 // Metric represents a base class for different types of metric preaggregations.
