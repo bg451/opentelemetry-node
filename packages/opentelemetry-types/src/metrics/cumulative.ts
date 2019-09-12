@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface CounterTimeseries {
+export interface CumulativeTimeseries {
   // Adds the given value to the current value. Values cannot be negative.
   add(value: number): void;
 

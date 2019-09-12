@@ -18,7 +18,7 @@ import { SpanContext } from '../trace/span_context';
 import { DistributedContext } from '../distributed_context/DistributedContext';
 import { MeasureTimeseries } from './measure';
 import { Metric, MetricOptions } from './metric';
-import { CounterTimeseries } from './counter';
+import { CumulativeTimeseries } from './cumulative';
 import { GaugeTimeseries } from './gauge';
 
 export interface RecordOptions {
@@ -33,19 +33,8 @@ export interface Meter {
   // Creates a new measure metric.
   createMeasure(name: string, options?: MetricOptions): Metric<MeasureTimeseries>;
 
-  // Creates a new counter metric.
-  createCounter(
-    name: string,
-    options?: MetricOptions
-  ): Metric<CounterTimeseries>;
-
-  // TODO: Measurements can have a long or double type. However, it looks like
-  // the metric timeseries API (according to spec) accepts values instead of
-  // Measurements, meaning that if you accept a `number`, the type gets lost.
-  // Both java and csharp have gone down the route of having two gauge interfaces,
-  // GaugeDoubleTimeseries and GaugeLongTimeseries, with param for that type. It'd
-  // be cool to only have a single interface, but maybe having two is necessary?
-  // Maybe include the type as a metrics option? Probs a good gh issue, the same goes for Measure types.
+  // Creates a new cumulative metric.
+  createCumulative(name: string, options?: MetricOptions): Metric<CumulativeTimeseries>;
 
   // Creates a new gauge metric.
   createGauge(name: string, options?: MetricOptions): Metric<GaugeTimeseries>;
