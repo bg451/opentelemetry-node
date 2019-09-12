@@ -17,7 +17,4 @@
 export interface CumulativeTimeseries {
   // Adds the given value to the current value. Values cannot be negative.
   add(value: number): void;
-
-  // Sets the given value. Value must be larger than the current recorded value.
-  set(value: number): void;
 }
