@@ -18,7 +18,7 @@ import { SpanContext } from '../trace/span_context';
 import { DistributedContext } from '../distributed_context/DistributedContext';
 import { MeasureTimeseries } from './measure';
 import { Metric, MetricOptions } from './metric';
-import { CounterTimeseries } from './counter';
+import { CumulativeTimeseries } from './cumulative';
 import { GaugeTimeseries } from './gauge';
 
 export interface RecordOptions {
@@ -33,8 +33,8 @@ export interface Meter {
   // Creates a new measure metric.
   createMeasure(name: string, options?: MetricOptions): Metric<MeasureTimeseries>;
 
-  // Creates a new counter metric.
-  createCounter(name: string, options?: MetricOptions): Metric<CounterTimeseries>;
+  // Creates a new cumulative metric.
+  createCumulative(name: string, options?: MetricOptions): Metric<CumulativeTimeseries>;
 
   // Creates a new gauge metric.
   createGauge(name: string, options?: MetricOptions): Metric<GaugeTimeseries>;
