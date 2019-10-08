@@ -29,6 +29,6 @@ export * from './trace/NoopTracer';
 export * from './trace/NoRecordingSpan';
 export * from './trace/sampler/ProbabilitySampler';
 export * from './trace/spancontext-utils';
-export * from './trace/TracerDelegate';
+export * from './trace/TracerFactoryDelegate';
 export * from './trace/TraceState';
 export * from './metrics/NoopMeter';
