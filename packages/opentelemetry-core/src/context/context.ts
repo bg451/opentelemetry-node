@@ -16,6 +16,7 @@
 
 // Context is an immutable object that stores concerns in process.
 export class Context {
+
   // set returns a new context with the given key.
   set(key: string, value: any): Context {
     return Object.assing({}, this, { key : value }) as Context;
@@ -26,7 +27,9 @@ export class Context {
   }
 
   delete(key: string) {
-    delete this[key]
+    let context = Object.assign({}, this);
+    delete context[key]
+    return context
   }
 }
 
