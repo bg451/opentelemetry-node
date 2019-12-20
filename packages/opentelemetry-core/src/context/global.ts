@@ -14,15 +14,3 @@
  * limitations under the License.
  */
 
-import * as types from '@opentelemetry/types';
-import { NoopScopeManager } from '@opentelemetry/scope-base';
-
-let globalScopeManager = new NoopScopeManager();
-
-export function initGlobalScopeManager(scope: types.ScopeManager): types.ScopeManager{
-  return (globalScopeManager = tracer);
-}
-
-export function getGlobalScopeManager(): types.ScopeManager {
-  return globalScopeManager;
-}

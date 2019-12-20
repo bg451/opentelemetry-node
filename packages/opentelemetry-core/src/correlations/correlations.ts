@@ -16,32 +16,33 @@
 
  import { Context } from '../context/Context';
 
-
  const CORRELATION_PREFIX = "__correlations__:"
+
 
  export function setCorrelation(context: Context, key: string, value: string): Context {
    return context.set(CORRELATION_PREFIX+key, value)
  }
 
-export function getCorrelation(context: Context, key: string): string || null {
-  const value: any = context[CORRELATION_PREFIX+key]
-    if value === null {
+export function getCorrelation(context: Context, key: string): string | null {
+  const value = context.get(CORRELATION_PREFIX+key)
+    if (value === undefined || value === null ) {
       return null;
     };
   return value as string;
 }
 
-export function removeCorrelation(context; Context, key: string): Context{
+export function removeCorrelation(context: Context, key: string): Context{
   return context.delete(key);
 }
 
 // return all correlation pairs
-export function getCorrelations(context: Context): {[key: string] string} {
+export function getCorrelations(context: Context): {[key: string]: string} {
   let correlations: {[key: string]: string} = {};
   for (let property in context) {
-    if (property.startsWith(this.CORRELATION_PREFIX)) {
-      const key = property.subString(CORRELATION_PREFIX.length);
-      correlations[key] = context[property]
+    if (property.startsWith(CORRELATION_PREFIX)) {
+      const key = property.substring(CORRELATION_PREFIX.length);
+      correlations[key] = context.get(property) as string;
     }
   }
+  return correlations
 }

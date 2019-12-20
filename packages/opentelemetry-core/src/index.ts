@@ -32,3 +32,5 @@ export * from './trace/spancontext-utils';
 export * from './trace/TracerDelegate';
 export * from './trace/TraceState';
 export * from './metrics/NoopMeter';
+export * from './context/Context';
+export * from './correlations/Correlations';

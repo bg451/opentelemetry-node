@@ -13,26 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-// Context is an immutable object that stores concerns in process.
-export class Context {
-  private _context: { [key: string]: unknown } = Object.create(null);
-
-  // set returns a new context with the given key.
-  set(key: string, value: unknown): Context {
-    const context = Object.assign({}, this);
-    context._context[key] = value;
-    return context
-  }
-
-  get(key: string): unknown {
-    return this._context[key]
-  }
-
-  delete(key: string) {
-    const context= Object.assign({}, this);
-    delete context._context[key]
-    return context
-  }
-}
-
