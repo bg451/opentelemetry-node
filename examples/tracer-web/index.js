@@ -1,38 +1,13 @@
-import { WebTracer } from '@opentelemetry/web';
+import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/tracing';
+import { WebTracerFactory } from '@opentelemetry/web';
+import { DocumentLoad } from '@opentelemetry/plugin-document-load';
 
-import * as shimmer from 'shimmer';
-
-class Tester {
-  constructor() {
-  }
-  add(name) {
-    console.log('calling add', name);
-  }
-}
-
-const tester = new Tester();
-
-const webTracer = new WebTracer();
-const span = webTracer.startSpan('span1');
-
-shimmer.wrap(Tester.prototype, 'add', (originalFunction) => {
-  return function patchedFunction() {
-    try {
-      span.addEvent('start');
-    } catch (e) {
-      console.log('error', e);
-    } finally {
-      const result = originalFunction.apply(this, arguments);
-      span.addEvent('after call');
-      span.end();
-      return result;
-    }
-  };
+const webTracerFactory = new WebTracerFactory({
+  plugins: [
+    new DocumentLoad()
+  ]
 });
 
-webTracer.withSpan(span, function () {
-  console.log(this === span);
-});
+webTracerFactory.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
 
-tester.add('foo');
-console.log(span);
+const webTracer = webTracerFactory.getTracer('example');

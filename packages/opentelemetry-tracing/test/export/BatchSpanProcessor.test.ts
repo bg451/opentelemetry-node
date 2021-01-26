@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import * as sinon from 'sinon';
 import {
   Span,
   BasicTracer,
@@ -37,7 +38,7 @@ function createUnSampledSpan(spanName: string): Span {
     sampler: NEVER_SAMPLER,
     logger: new NoopLogger(),
   });
-  const span = tracer.startSpan(spanName, { isRecordingEvents: false });
+  const span = tracer.startSpan(spanName, { isRecording: false });
   span.end();
   return span as Span;
 }
@@ -60,16 +61,19 @@ describe('BatchSpanProcessor', () => {
     it('should create a BatchSpanProcessor instance', () => {
       const processor = new BatchSpanProcessor(exporter);
       assert.ok(processor instanceof BatchSpanProcessor);
+      processor.shutdown();
     });
 
     it('should create a BatchSpanProcessor instance with config', () => {
       const processor = new BatchSpanProcessor(exporter, defaultBufferConfig);
       assert.ok(processor instanceof BatchSpanProcessor);
+      processor.shutdown();
     });
 
     it('should create a BatchSpanProcessor instance with empty config', () => {
       const processor = new BatchSpanProcessor(exporter, {});
       assert.ok(processor instanceof BatchSpanProcessor);
+      processor.shutdown();
     });
   });
 
@@ -100,9 +104,11 @@ describe('BatchSpanProcessor', () => {
         processor.onEnd(span);
         assert.strictEqual(exporter.getFinishedSpans().length, 0);
       }
+      processor.shutdown();
     });
 
     it('should force flush when timeout exceeded', done => {
+      const clock = sinon.useFakeTimers();
       const processor = new BatchSpanProcessor(exporter, defaultBufferConfig);
       for (let i = 0; i < defaultBufferConfig.bufferSize; i++) {
         const span = createSampledSpan(`${name}_${i}`);
@@ -114,6 +120,10 @@ describe('BatchSpanProcessor', () => {
         assert.strictEqual(exporter.getFinishedSpans().length, 5);
         done();
       }, defaultBufferConfig.bufferTimeout + 1000);
-    }).timeout(defaultBufferConfig.bufferTimeout * 2);
+
+      clock.tick(defaultBufferConfig.bufferTimeout + 1000);
+
+      clock.restore();
+    });
   });
 });

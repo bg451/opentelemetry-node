@@ -5,7 +5,7 @@
 [![devDependencies][devDependencies-image]][devDependencies-url]
 [![Apache License][license-image]][license-image]
 
-`tracer-basic` contains the foundation for all tracing SDKs of [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js).
+`tracing` contains the foundation for all tracing SDKs of [opentelemetry-js](https://github.com/open-telemetry/opentelemetry-js).
 
 Used standalone, this module provides methods for manual instrumentation of code, offering full control over span creation for client-side JavaScript (browser) and Node.js.
 
@@ -25,16 +25,16 @@ npm install --save @opentelemetry/tracing
 
 ```js
 const opentelemetry = require('@opentelemetry/core');
-const { BasicTracer } = require('@opentelemetry/tracing');
+const { BasicTracerFactory } = require('@opentelemetry/tracing');
 
-// To start a trace, you first need to initialize the Tracer.
+// To start a trace, you first need to initialize the Tracer factory.
 // NOTE: the default OpenTelemetry tracer does not record any tracing information.
-const tracer = new BasicTracer();
+const factory = new BasicTracerFactory();
 
-// Initialize the OpenTelemetry APIs to use the BasicTracer bindings
-opentelemetry.initGlobalTracer(tracer);
+// Initialize the OpenTelemetry APIs to use the BasicTracerFactory bindings
+opentelemetry.initGlobalTracerFactory(factory);
 
-// To create a span in a trace, we used the global singleton tracer to start a new span.
+// To create a span in a trace, we use the global tracer factory to start a new span.
 const span = opentelemetry.getTracer().startSpan('foo');
 
 // Create an Attributes
@@ -45,7 +45,7 @@ span.end();
 ```
 
 ## Example
-See [examples/tracer-basic-node](https://github.com/open-telemetry/opentelemetry-js/tree/master/examples/tracer-basic-node) for an end-to-end example, including exporting created spans.
+See [examples/basic-tracer-node](https://github.com/open-telemetry/opentelemetry-js/tree/master/examples/basic-tracer-node) for an end-to-end example, including exporting created spans.
 
 ## Useful links
 - For more information on OpenTelemetry, visit: <https://opentelemetry.io/>

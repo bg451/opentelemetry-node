@@ -46,25 +46,22 @@ export interface MetricOptions {
   disabled?: boolean;
 
   /**
-   * Bidirectional allows counter metrics to accept negative values.
-   * Otherwise, as false, the counter is unidirectional and rejects negative values.
-   * @default false
+   * Monotonic allows this metric to accept negative values. If `true` only
+   * non-negative values are expected.
    */
-  bidirectional?: boolean;
+  monotonic?: boolean;
 
   /**
-   * Unidirectional indicates a gauge metric only ascends, indicating it is for
-   * rate calculations.
-   * @default false
+   * Indicates the type of the recorded value.
+   * @default {@link ValueType.DOUBLE}
    */
-  unidirectional?: boolean;
+  valueType?: ValueType;
+}
 
-  /**
-   * nonNegative indicates a measure is never negative, indicating it is for rate
-   * calculations.
-   * @default false
-   */
-  nonNegative?: boolean;
+/** The Type of value. It describes how the data is reported. */
+export enum ValueType {
+  INT,
+  DOUBLE,
 }
 
 /**
